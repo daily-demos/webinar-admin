@@ -10,6 +10,7 @@ import {
 } from "./Form";
 import { BodyText, ErrorMessage } from "./Text";
 import checkmark from "./images/checkmark.svg";
+import Result from "./Result";
 
 const RoomForm = () => {
   const roomInputRef = useRef();
@@ -50,6 +51,7 @@ const RoomForm = () => {
     fetch(url, options)
       .then((res) => res.json())
       .then((json) => {
+        console.log(json);
         setRoomInfo(json);
         setSubmitting(false);
       })
@@ -101,20 +103,22 @@ const RoomForm = () => {
       {roomInfo && (
         <>
           <ClearButton onClick={clear}>Clear results</ClearButton>
-          <BodyText>Shareable URL: {roomInfo?.url}</BodyText>
-          <BodyText>Privacy: {roomInfo?.privacy}</BodyText>
-          <BodyText>Name: {roomInfo?.name}</BodyText>
-          <BodyText>Autojoin: {roomInfo?.config?.autojoin}</BodyText>
-          <BodyText>Autojoin: {roomInfo?.config?.autojoin}</BodyText>
-          <BodyText>
-            Broadcast only: {roomInfo?.config?.owner_only_broadcast}
-          </BodyText>
-          <BodyText>
-            Start with audio off: {roomInfo?.config?.start_audio_off}
-          </BodyText>
-          <BodyText>
-            Start with video off: {roomInfo?.config?.start_video_off}
-          </BodyText>
+          <Result label="Shareable URL:" value={roomInfo?.url} />
+          <Result label="Privacy:" value={roomInfo?.privacy} />
+          <Result label="Name:" value={roomInfo?.name} />
+          <Result label="Autojoin:" value={roomInfo?.config?.autojoin} />
+          <Result
+            label="Broadcast only:"
+            value={roomInfo?.config?.owner_only_broadcast}
+          />
+          <Result
+            label="Start with audio off:"
+            value={roomInfo?.config?.start_audio_off}
+          />
+          <Result
+            label="Start with video off:"
+            value={roomInfo?.config?.start_video_off}
+          />
         </>
       )}
     </Form>
