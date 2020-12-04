@@ -20,8 +20,8 @@ export const ErrorMessage = styled.p`
   font-size: ${theme.fontSize.med};
   color: ${theme.colors.redDark};
   background-color: ${theme.colors.redLight};
-  padding: 0.25rem;
-  margin: 0.25rem auto;
+  padding: 0.5rem 1rem;
+  margin: 2rem auto 0.5rem auto;
   border-radius: 6px;
   border: 1px solid ${theme.colors.red};
 `;
