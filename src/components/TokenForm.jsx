@@ -1,6 +1,14 @@
 import React, { useRef, useState } from "react";
 import { SettingsList, SettingsListItem, Icon, ListItemText } from "./List";
-import { Form, FormHeader, Label, Input, SubmitButton } from "./Form";
+import {
+  Form,
+  FormHeader,
+  Label,
+  Input,
+  SubmitButton,
+  ClearButton,
+  ResultsContainer,
+} from "./Form";
 import { ErrorMessage } from "./Text";
 import checkmark from "./images/checkmark.svg";
 import Result from "./Result";
