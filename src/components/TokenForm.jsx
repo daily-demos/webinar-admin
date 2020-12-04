@@ -17,7 +17,7 @@ const TokenForm = () => {
   const roomInputRef = useRef();
   const usernameInputRef = useRef();
   const [submitting, setSubmitting] = useState(false);
-  const [tokenInfo, setTokenInfo] = useState(false);
+  const [tokenInfo, setTokenInfo] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null); // null | string
 
   const submitTokenForm = (e) => {
@@ -101,22 +101,17 @@ const TokenForm = () => {
       {tokenInfo && (
         <ResultsContainer>
           <ClearButton onClick={clear}>Clear results</ClearButton>
-          <Result main label="Token:" value={tokenInfo?.token} main />
-          <Result label="Room name:" value={tokenInfo?.room_name} />
-          <Result label="Is owner:" value={tokenInfo?.is_owner.toString()} />
-          <Result label="Your username:" value={tokenInfo?.user_name} />
+
           <Result
-            label="Screen share enabled:"
-            value={tokenInfo?.enable_screenshare}
+            column
+            main
+            label="Your admin token (add to end of webinar link):"
+            value={`?t=${tokenInfo?.token}`}
+            main
           />
-          <Result
-            label="Start with video off:"
-            value={tokenInfo?.start_video_off.toString()}
-          />
-          <Result
-            label="Start with audio off:"
-            value={tokenInfo?.start_audio_off.toString()}
-          />
+          <ErrorMessage>
+            This token is not saved anywhere. Please keep it somewhere safe!
+          </ErrorMessage>
         </ResultsContainer>
       )}
     </Form>

@@ -17,6 +17,11 @@ export const BodyText = styled.p`
 `;
 
 export const ErrorMessage = styled.p`
-  font-size: ${theme.fontSize.large};
-  color: ${theme.colors.red};
+  font-size: ${theme.fontSize.med};
+  color: ${theme.colors.redDark};
+  background-color: ${theme.colors.redLight};
+  padding: 0.25rem;
+  margin: 0.25rem auto;
+  border-radius: 6px;
+  border: 1px solid ${theme.colors.red};
 `;
