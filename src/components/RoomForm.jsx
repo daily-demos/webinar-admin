@@ -16,26 +16,31 @@ const RoomForm = () => {
         "Eep, something when wrong! We couldn't access the input value. :|"
       );
     }
-    console.log(process.env);
-    const data = {
-      properties: {
-        autojoin: true,
-        start_video_off: true,
-        start_audio_off: true,
-        owner_only_broadcast: true,
-      },
-      privacy: "public",
-      name: roomInputRef?.current?.value,
-    };
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}api/rooms`, {
+    const url = `https://admin-daily-webinar.netlify.app/api/rooms`;
+
+    const options = {
       method: "POST",
-      body: JSON.stringify(data),
-      mode: "no-cors",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.REACT_APP_DAILY_API_KEY}`,
       },
-    });
-    console.log(response);
+      mode: "no-cors",
+      body: JSON.stringify({
+        properties: {
+          autojoin: true,
+          start_video_off: true,
+          start_audio_off: true,
+          owner_only_broadcast: true,
+        },
+        privacy: "public",
+        name: roomInputRef?.current?.value,
+      }),
+    };
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+      .catch((err) => console.error("oops. error:" + err));
   };
   return (
     <Form onSubmit={submitRoomForm}>

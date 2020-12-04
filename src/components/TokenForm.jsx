@@ -17,27 +17,31 @@ const TokenForm = () => {
         "Eep, something when wrong! We couldn't access the input values. :|"
       );
     }
-    const data = {
-      properties: {
-        is_owner: true,
-        user_name: !usernameInputRef?.current?.value,
-        enable_screenshare: true,
-        start_video_off: false,
-        start_audio_off: false,
-        room_name: !roomInputRef?.current?.value,
-      },
-    };
-    fetch(`${process.env.REACT_APP_BASE_URL}api/meeting-tokens`, {
+    const url = `https://admin-daily-webinar.netlify.app/api/meeting-tokens`;
+
+    const options = {
       method: "POST",
-      body: JSON.stringify(data),
-      mode: "no-cors",
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.REACT_APP_DAILY_API_KEY}`,
       },
-    })
+      mode: "no-cors",
+      body: JSON.stringify({
+        properties: {
+          is_owner: true,
+          user_name: !usernameInputRef?.current?.value,
+          enable_screenshare: true,
+          start_video_off: false,
+          start_audio_off: false,
+          room_name: !roomInputRef?.current?.value,
+        },
+      }),
+    };
+
+    fetch(url, options)
       .then((res) => res.json())
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((json) => console.log(json))
+      .catch((err) => console.error("oops. error:" + err));
   };
 
   return (
