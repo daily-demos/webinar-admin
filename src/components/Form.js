@@ -60,11 +60,20 @@ export const ClearButton = styled.button`
   border: 1px solid ${theme.colors.redLight};
   color: ${theme.colors.blueDark};
   font-weight: 600;
-  margin-top: 2rem;
-  margin-left: auto;
+  margin: 0 0 0.25rem auto;
   cursor: pointer;
 
   &:hover {
     border: 1px solid ${theme.colors.teal};
   }
+`;
+
+export const ResultsContainer = styled.div`
+  margin-top: 1rem;
+  border-radius: 6px;
+  padding: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid ${theme.colors.turquoise};
 `;

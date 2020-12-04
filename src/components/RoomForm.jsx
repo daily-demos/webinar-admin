@@ -7,8 +7,9 @@ import {
   Input,
   SubmitButton,
   ClearButton,
+  ResultsContainer,
 } from "./Form";
-import { BodyText, ErrorMessage } from "./Text";
+import { ErrorMessage } from "./Text";
 import checkmark from "./images/checkmark.svg";
 import Result from "./Result";
 
@@ -101,25 +102,28 @@ const RoomForm = () => {
       <SubmitButton type="submit" value="Create room" disabled={submitting} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {roomInfo && (
-        <>
+        <ResultsContainer>
           <ClearButton onClick={clear}>Clear results</ClearButton>
           <Result label="Shareable URL:" value={roomInfo?.url} />
           <Result label="Privacy:" value={roomInfo?.privacy} />
           <Result label="Name:" value={roomInfo?.name} />
-          <Result label="Autojoin:" value={roomInfo?.config?.autojoin} />
+          <Result
+            label="Autojoin:"
+            value={roomInfo?.config?.autojoin.toString()}
+          />
           <Result
             label="Broadcast only:"
-            value={roomInfo?.config?.owner_only_broadcast}
+            value={roomInfo?.config?.owner_only_broadcast.toString()}
           />
           <Result
             label="Start with audio off:"
-            value={roomInfo?.config?.start_audio_off}
+            value={roomInfo?.config?.start_audio_off.toString()}
           />
           <Result
             label="Start with video off:"
-            value={roomInfo?.config?.start_video_off}
+            value={roomInfo?.config?.start_video_off.toString()}
           />
-        </>
+        </ResultsContainer>
       )}
     </Form>
   );
