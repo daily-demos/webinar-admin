@@ -55,6 +55,10 @@ const TokenForm = () => {
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
+        if (json.error) {
+          setErrorMessage(`${json.error}: ${json.info}`);
+          return;
+        }
         setTokenInfo(json);
         setSubmitting(false);
         setErrorMessage(false);

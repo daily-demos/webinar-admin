@@ -54,6 +54,10 @@ const RoomForm = () => {
       .then((json) => {
         console.log(json);
         setRoomInfo(json);
+        if (json.error) {
+          setErrorMessage(`${json.error}: ${json.info}`);
+          return;
+        }
         setSubmitting(false);
         setErrorMessage(false);
       })
