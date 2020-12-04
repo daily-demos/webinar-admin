@@ -52,3 +52,19 @@ export const SubmitButton = styled.input`
     opacity: 0.5;
   }
 `;
+
+export const ClearButton = styled.button`
+  padding: 0.25rem;
+  border-radius: 6px;
+  background-color: ${theme.colors.redLight};
+  border: 1px solid ${theme.colors.redLight};
+  color: ${theme.colors.blueDark};
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-left: auto;
+  cursor: pointer;
+
+  &:hover {
+    border: 1px solid ${theme.colors.teal};
+  }
+`;
