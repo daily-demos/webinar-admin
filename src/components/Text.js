@@ -15,3 +15,8 @@ export const BodyText = styled.p`
   font-size: ${theme.fontSize.base};
   color: ${theme.colors.blueDark};
 `;
+
+export const ErrorMessage = styled.p`
+  font-size: ${theme.fontSize.large};
+  color: ${theme.colors.red};
+`;

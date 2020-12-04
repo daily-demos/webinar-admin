@@ -1,15 +1,41 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { SettingsList, SettingsListItem, Icon, ListItemText } from "./List";
 import { Form, FormHeader, Label, Input, SubmitButton } from "./Form";
+import { ErrorMessage } from "./Text";
 import checkmark from "./images/checkmark.svg";
 
 const RoomForm = () => {
-  const [roomName, setRoomName] = useState();
+  const roomInputRef = useRef();
   const [submitting, setSubmitting] = useState();
-  // const [roomName, setRoomName] = useState();
-  // const [roomName, setRoomName] = useState();
+  const [errorMessage, setErrorMessage] = useState(null); // null | string
+
   const submitRoomForm = () => {
-    console.log("submit!");
+    if (!roomInputRef?.current?.value) {
+      setErrorMessage(
+        "Eep, something when wrong! We couldn't access the input value. :|"
+      );
+    }
+    const data = {
+      properties: {
+        autojoin: true,
+        start_video_off: true,
+        start_audio_off: true,
+        owner_only_broadcast: true,
+      },
+      privacy: "public",
+      name: roomInputRef?.current?.value,
+    };
+    fetch(`${process.env.REACT_APP_BASE_URL}api/rooms`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      //   mode: "no-cors",
+      headers: {
+        Authorization: `Bearer ${process.env.DAILY_API_KEY}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
   return (
     <Form onSubmit={submitRoomForm}>
@@ -42,8 +68,9 @@ const RoomForm = () => {
         </SettingsListItem>
       </SettingsList>
       <Label htmlFor="roomName">Room name</Label>
-      <Input id="roomName" type="text" required />
+      <Input ref={roomInputRef} id="roomName" type="text" required />
       <SubmitButton type="submit" value="Create room" disabled={submitting} />
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </Form>
   );
 };
