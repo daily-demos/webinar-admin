@@ -14,6 +14,7 @@ export const SubHeader = styled.h2`
 export const BodyText = styled.p`
   font-size: ${theme.fontSize.base};
   color: ${theme.colors.blueDark};
+  margin: 0.25rem 0;
 `;
 
 export const ErrorMessage = styled.p`

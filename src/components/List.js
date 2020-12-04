@@ -10,12 +10,12 @@ export const SettingsList = styled.ul`
 export const SettingsListItem = styled.li`
   display: flex;
   align-items: center;
-  margin: 0.25rem 0;
+  margin: 0.1rem 0;
 `;
 
 export const ListItemText = styled.p`
   color: ${theme.colors.blueDark};
-  font-size: ${theme.fontSize.large};
+  font-size: ${theme.fontSize.med};
   margin: 0;
 `;
 

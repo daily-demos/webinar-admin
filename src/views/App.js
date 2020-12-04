@@ -51,7 +51,7 @@ function App() {
 }
 
 const Container = styled.div`
-  max-width: 600px;
+  max-width: 800px;
   padding: 2rem;
   margin: auto;
 `;

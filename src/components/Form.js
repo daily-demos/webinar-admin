@@ -17,7 +17,7 @@ export const Form = styled.form`
 export const FormHeader = styled.p`
   font-weight: 600;
   color: ${theme.colors.orange};
-  font-size: ${theme.fontSize.large};
+  font-size: ${theme.fontSize.med};
 `;
 
 export const Label = styled.label`
