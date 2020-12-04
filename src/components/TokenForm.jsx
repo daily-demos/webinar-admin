@@ -57,11 +57,11 @@ const TokenForm = () => {
         console.log(json);
         if (json.error) {
           setErrorMessage(`${json.error}: ${json.info}`);
-          return;
+        } else {
+          setTokenInfo(json);
+          setSubmitting(false);
+          setErrorMessage(false);
         }
-        setTokenInfo(json);
-        setSubmitting(false);
-        setErrorMessage(false);
       })
       .catch((err) => {
         setErrorMessage("That did not work! :'( Please try again.");
