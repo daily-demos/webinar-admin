@@ -9,12 +9,14 @@ const RoomForm = () => {
   const [submitting, setSubmitting] = useState();
   const [errorMessage, setErrorMessage] = useState(null); // null | string
 
-  const submitRoomForm = () => {
+  const submitRoomForm = async (e) => {
+    e.preventDefault();
     if (!roomInputRef?.current?.value) {
       setErrorMessage(
         "Eep, something when wrong! We couldn't access the input value. :|"
       );
     }
+    console.log(process.env);
     const data = {
       properties: {
         autojoin: true,
@@ -25,17 +27,15 @@ const RoomForm = () => {
       privacy: "public",
       name: roomInputRef?.current?.value,
     };
-    fetch(`${process.env.REACT_APP_BASE_URL}api/rooms`, {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}api/rooms`, {
       method: "POST",
       body: JSON.stringify(data),
-      //   mode: "no-cors",
+      mode: "no-cors",
       headers: {
-        Authorization: `Bearer ${process.env.DAILY_API_KEY}`,
+        Authorization: `Bearer ${process.env.REACT_APP_DAILY_API_KEY}`,
       },
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+    });
+    console.log(response);
   };
   return (
     <Form onSubmit={submitRoomForm}>

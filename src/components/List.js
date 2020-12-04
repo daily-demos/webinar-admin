@@ -13,9 +13,10 @@ export const SettingsListItem = styled.li`
   margin: 0.25rem 0;
 `;
 
-export const ListItemText = styled.li`
+export const ListItemText = styled.p`
   color: ${theme.colors.blueDark};
   font-size: ${theme.fontSize.large};
+  margin: 0;
 `;
 
 export const Icon = styled.img`

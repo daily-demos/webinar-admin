@@ -10,7 +10,8 @@ const TokenForm = () => {
   const [submitting, setSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null); // null | string
 
-  const submitTokenForm = () => {
+  const submitTokenForm = (e) => {
+    e.preventDefault();
     if (!roomInputRef?.current?.value || !usernameInputRef?.current?.value) {
       setErrorMessage(
         "Eep, something when wrong! We couldn't access the input values. :|"
@@ -31,7 +32,7 @@ const TokenForm = () => {
       body: JSON.stringify(data),
       mode: "no-cors",
       headers: {
-        Authorization: `Bearer ${process.env.DAILY_API_KEY}`,
+        Authorization: `Bearer ${process.env.REACT_APP_DAILY_API_KEY}`,
       },
     })
       .then((res) => res.json())
