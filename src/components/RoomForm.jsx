@@ -57,9 +57,9 @@ const RoomForm = () => {
           setErrorMessage(`${json.error}: ${json.info}`);
         } else {
           setRoomInfo(json);
-          setSubmitting(false);
           setErrorMessage(false);
         }
+        setSubmitting(false);
       })
       .catch((err) => {
         setErrorMessage("That did not work! :'( Please try again.");

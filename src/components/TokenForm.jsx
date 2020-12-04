@@ -59,9 +59,9 @@ const TokenForm = () => {
           setErrorMessage(`${json.error}: ${json.info}`);
         } else {
           setTokenInfo(json);
-          setSubmitting(false);
           setErrorMessage(false);
         }
+        setSubmitting(false);
       })
       .catch((err) => {
         setErrorMessage("That did not work! :'( Please try again.");
