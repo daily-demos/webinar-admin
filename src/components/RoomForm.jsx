@@ -91,7 +91,7 @@ const RoomForm = () => {
         </SettingsListItem>
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
-          <ListItemText>Public (anyone with link can join</ListItemText>
+          <ListItemText>Public (anyone with link can join)</ListItemText>
         </SettingsListItem>
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
