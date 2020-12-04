@@ -98,7 +98,7 @@ const RoomForm = () => {
           <ListItemText>Admin mic off to start</ListItemText>
         </SettingsListItem>
       </SettingsList>
-      <Label htmlFor="roomName">Room name</Label>
+      <Label htmlFor="roomName">Webinar room name</Label>
       <Input ref={roomInputRef} id="roomName" type="text" required />
       <SubmitButton type="submit" value="Create room" disabled={submitting} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

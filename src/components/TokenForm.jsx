@@ -92,16 +92,17 @@ const TokenForm = () => {
           <ListItemText>Your video and mic will be off by default</ListItemText>
         </SettingsListItem>
       </SettingsList>
-      <Label htmlFor="roomName">Room name</Label>
+      <Label htmlFor="roomName">
+        Webinar room name (existing or from form above)
+      </Label>
       <Input ref={roomInputRef} id="roomName" type="text" required />
-      <Label htmlFor="userName">Username</Label>
+      <Label htmlFor="userName">Admin's username</Label>
       <Input ref={usernameInputRef} id="userName" type="text" required />
       <SubmitButton type="submit" value="Create token" disabled={submitting} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {tokenInfo && (
         <ResultsContainer>
           <ClearButton onClick={clear}>Clear results</ClearButton>
-
           <Result
             column
             main
