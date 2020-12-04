@@ -1,5 +1,5 @@
 [template.environment]
-  DAILY_API_KEY = "Replace with API key"
+  REACT_APP_DAILY_API_KEY = "Replace with API key"
 
 [[redirects]]
   # Proxies the Daily /rooms endpoint, POST will create a room and a GET will return a list 
