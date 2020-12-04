@@ -3,11 +3,13 @@ import { SettingsList, SettingsListItem, Icon, ListItemText } from "./List";
 import { Form, FormHeader, Label, Input, SubmitButton } from "./Form";
 import { ErrorMessage } from "./Text";
 import checkmark from "./images/checkmark.svg";
+import Result from "./Result";
 
 const TokenForm = () => {
   const roomInputRef = useRef();
   const usernameInputRef = useRef();
   const [submitting, setSubmitting] = useState(false);
+  const [tokenInfo, setTokenInfo] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null); // null | string
 
   const submitTokenForm = (e) => {
@@ -16,7 +18,10 @@ const TokenForm = () => {
       setErrorMessage(
         "Eep, something when wrong! We couldn't access the input values. :|"
       );
+      return;
     }
+    setSubmitting(true);
+
     const url = `https://admin-daily-webinar.netlify.app/api/meeting-tokens`;
 
     const options = {
@@ -40,8 +45,22 @@ const TokenForm = () => {
 
     fetch(url, options)
       .then((res) => res.json())
-      .then((json) => console.log(json))
-      .catch((err) => console.error("oops. error:" + err));
+      .then((json) => {
+        console.log(json);
+        setTokenInfo(json);
+        setSubmitting(false);
+        setErrorMessage(false);
+      })
+      .catch((err) => {
+        setErrorMessage("That did not work! :'( Please try again.");
+        setSubmitting(false);
+      });
+  };
+
+  const clear = () => {
+    setTokenInfo(null);
+    roomInputRef.current.value = "";
+    usernameInputRef.current.value = "";
   };
 
   return (
@@ -50,9 +69,19 @@ const TokenForm = () => {
       <SettingsList>
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
-          <ListItemText>
-            Returns a link to the room with the token appended
-          </ListItemText>
+          <ListItemText>Makes you an owner</ListItemText>
+        </SettingsListItem>
+        <SettingsListItem>
+          <Icon src={checkmark} alt="checkmark" />
+          <ListItemText>Let's you set your webinar username</ListItemText>
+        </SettingsListItem>
+        <SettingsListItem>
+          <Icon src={checkmark} alt="checkmark" />
+          <ListItemText>Enables screen share option</ListItemText>
+        </SettingsListItem>
+        <SettingsListItem>
+          <Icon src={checkmark} alt="checkmark" />
+          <ListItemText>Your video and mic will be off by default</ListItemText>
         </SettingsListItem>
       </SettingsList>
       <Label htmlFor="roomName">Room name</Label>
@@ -61,6 +90,27 @@ const TokenForm = () => {
       <Input ref={usernameInputRef} id="userName" type="text" required />
       <SubmitButton type="submit" value="Create token" disabled={submitting} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {tokenInfo && (
+        <ResultsContainer>
+          <ClearButton onClick={clear}>Clear results</ClearButton>
+          <Result main label="Token:" value={tokenInfo?.token} main />
+          <Result label="Room name:" value={tokenInfo?.room_name} />
+          <Result label="Is owner:" value={tokenInfo?.is_owner.toString()} />
+          <Result label="Your username:" value={tokenInfo?.user_name} />
+          <Result
+            label="Screen share enabled:"
+            value={tokenInfo?.enable_screenshare}
+          />
+          <Result
+            label="Start with video off:"
+            value={tokenInfo?.start_video_off.toString()}
+          />
+          <Result
+            label="Start with audio off:"
+            value={tokenInfo?.start_audio_off.toString()}
+          />
+        </ResultsContainer>
+      )}
     </Form>
   );
 };

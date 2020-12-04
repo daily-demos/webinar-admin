@@ -55,6 +55,7 @@ const RoomForm = () => {
         console.log(json);
         setRoomInfo(json);
         setSubmitting(false);
+        setErrorMessage(false);
       })
       .catch((err) => {
         setErrorMessage("That did not work! :'( Please try again.");
@@ -104,7 +105,7 @@ const RoomForm = () => {
       {roomInfo && (
         <ResultsContainer>
           <ClearButton onClick={clear}>Clear results</ClearButton>
-          <Result label="Shareable URL:" value={roomInfo?.url} />
+          <Result main label="Shareable URL:" value={roomInfo?.url} />
           <Result label="Privacy:" value={roomInfo?.privacy} />
           <Result label="Name:" value={roomInfo?.name} />
           <Result
