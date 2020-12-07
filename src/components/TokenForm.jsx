@@ -42,11 +42,11 @@ const TokenForm = () => {
       body: JSON.stringify({
         properties: {
           is_owner: true,
-          user_name: !usernameInputRef?.current?.value,
+          user_name: usernameInputRef?.current?.value,
           enable_screenshare: true,
           start_video_off: false,
           start_audio_off: false,
-          room_name: !roomInputRef?.current?.value,
+          room_name: roomInputRef?.current?.value,
         },
       }),
     };
