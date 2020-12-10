@@ -102,6 +102,10 @@ const RoomForm = () => {
           <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Admin mic off to start</ListItemText>
         </SettingsListItem>
+        <SettingsListItem>
+          <Icon src={checkmark} alt="checkmark" />
+          <ListItemText>Local recordings enabled</ListItemText>
+        </SettingsListItem>
       </SettingsList>
       <Label htmlFor="roomName">Webinar room name</Label>
       <Input ref={roomInputRef} id="roomName" type="text" required />
@@ -128,6 +132,10 @@ const RoomForm = () => {
           <Result
             label="Start with video off:"
             value={roomInfo?.config?.start_video_off.toString()}
+          />
+          <Result
+            label="Local recordings enabled:"
+            value={roomInfo?.config?.enable_recording.toString()}
           />
         </ResultsContainer>
       )}
