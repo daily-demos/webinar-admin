@@ -43,6 +43,7 @@ const RoomForm = () => {
           start_video_off: true,
           start_audio_off: true,
           owner_only_broadcast: true,
+          enable_recording: "local",
         },
         privacy: "public",
         name: roomInputRef?.current?.value,
