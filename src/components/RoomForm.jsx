@@ -45,7 +45,7 @@ const RoomForm = () => {
           owner_only_broadcast: true,
           enable_recording: "local",
         },
-        privacy: "public",
+        privacy: "private",
         name: roomInputRef?.current?.value,
       }),
     };
@@ -63,6 +63,7 @@ const RoomForm = () => {
         setSubmitting(false);
       })
       .catch((err) => {
+        console.log(err);
         setErrorMessage("That did not work! :'( Please try again.");
         setSubmitting(false);
       });
@@ -92,7 +93,9 @@ const RoomForm = () => {
         </SettingsListItem>
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
-          <ListItemText>Public (anyone with link can join)</ListItemText>
+          <ListItemText>
+            Private (admins must explicitly admit participants to join to call)
+          </ListItemText>
         </SettingsListItem>
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
