@@ -47,7 +47,7 @@ const RoomForm = () => {
           owner_only_broadcast: true,
           enable_recording: "local",
         },
-        privacy: roomInputRef?.current?.checked ? "private" : "public",
+        privacy: privacyInputRef?.current?.checked ? "private" : "public",
         name: roomInputRef?.current?.value,
       }),
     };
