@@ -12,9 +12,11 @@ import {
 import { ErrorMessage } from "./Text";
 import checkmark from "./images/checkmark.svg";
 import Result from "./Result";
+import styled from "styled-components";
 
 const RoomForm = () => {
   const roomInputRef = useRef();
+  const privacyInputRef = useRef();
   const [submitting, setSubmitting] = useState();
   const [roomInfo, setRoomInfo] = useState();
   const [errorMessage, setErrorMessage] = useState(null); // null | string
@@ -45,7 +47,7 @@ const RoomForm = () => {
           owner_only_broadcast: true,
           enable_recording: "local",
         },
-        privacy: "private",
+        privacy: roomInputRef?.current?.checked ? "private" : "public",
         name: roomInputRef?.current?.value,
       }),
     };
@@ -93,12 +95,6 @@ const RoomForm = () => {
         </SettingsListItem>
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
-          <ListItemText>
-            Private (admins must explicitly admit participants to join to call)
-          </ListItemText>
-        </SettingsListItem>
-        <SettingsListItem>
-          <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Admin camera off to start</ListItemText>
         </SettingsListItem>
         <SettingsListItem>
@@ -112,6 +108,12 @@ const RoomForm = () => {
       </SettingsList>
       <Label htmlFor="roomName">Webinar room name</Label>
       <Input ref={roomInputRef} id="roomName" type="text" required />
+      <FlexRow>
+        <input ref={privacyInputRef} id="privacySetting" type="checkbox" />
+        <Label htmlFor="privacySetting">
+          Make room private (guests will need to be admitted to the call)
+        </Label>
+      </FlexRow>
       <SubmitButton type="submit" value="Create room" disabled={submitting} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {roomInfo && (
@@ -145,5 +147,10 @@ const RoomForm = () => {
     </Form>
   );
 };
+
+const FlexRow = styled.div`
+  display: flex;
+  align-items: baseline;
+`;
 
 export default RoomForm;
