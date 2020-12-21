@@ -45,7 +45,7 @@ const RoomForm = () => {
           start_video_off: true,
           start_audio_off: true,
           owner_only_broadcast: true,
-          enable_recording: "local",
+          // enable_recording: "local",
         },
         privacy: privacyInputRef?.current?.checked ? "private" : "public",
         name: roomInputRef?.current?.value,
@@ -101,10 +101,10 @@ const RoomForm = () => {
           <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Admin mic off to start</ListItemText>
         </SettingsListItem>
-        <SettingsListItem>
+        {/* <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Local recordings enabled</ListItemText>
-        </SettingsListItem>
+        </SettingsListItem> */}
       </SettingsList>
       <Label htmlFor="roomName">Webinar room name</Label>
       <Input ref={roomInputRef} id="roomName" type="text" required />
@@ -118,8 +118,13 @@ const RoomForm = () => {
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {roomInfo && (
         <ResultsContainer>
+          {console.log(roomInfo)}
           <ClearButton onClick={clear}>Clear results</ClearButton>
-          <Result main label="Shareable URL:" value={roomInfo?.url} />
+          <Result
+            main
+            label="Webinar room URL (share with webinar participants):"
+            value={`https://discover.daily.co/${roomInfo?.name}`}
+          />
           <Result label="Privacy:" value={roomInfo?.privacy} />
           <Result label="Name:" value={roomInfo?.name} />
           <Result
@@ -138,10 +143,10 @@ const RoomForm = () => {
             label="Start with video off:"
             value={roomInfo?.config?.start_video_off.toString()}
           />
-          <Result
+          {/* <Result
             label="Local recordings enabled:"
             value={roomInfo?.config?.enable_recording.toString()}
-          />
+          /> */}
         </ResultsContainer>
       )}
     </Form>

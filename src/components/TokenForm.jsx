@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { SettingsList, SettingsListItem, Icon, ListItemText } from "./List";
 import {
   Form,
@@ -14,15 +14,15 @@ import checkmark from "./images/checkmark.svg";
 import Result from "./Result";
 
 const TokenForm = () => {
-  const roomInputRef = useRef();
-  const usernameInputRef = useRef();
+  const [roomName, setRoomName] = useState("");
+  const [username, setUsername] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [tokenInfo, setTokenInfo] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null); // null | string
 
   const submitTokenForm = (e) => {
     e.preventDefault();
-    if (!roomInputRef?.current?.value || !usernameInputRef?.current?.value) {
+    if (!roomName || !username) {
       setErrorMessage(
         "Eep, something when wrong! We couldn't access the input values. :|"
       );
@@ -42,11 +42,11 @@ const TokenForm = () => {
       body: JSON.stringify({
         properties: {
           is_owner: true,
-          user_name: usernameInputRef?.current?.value,
-          enable_screenshare: true,
+          user_name: username,
+          // enable_screenshare: true,
           start_video_off: false,
           start_audio_off: false,
-          room_name: roomInputRef?.current?.value,
+          room_name: roomName,
         },
       }),
     };
@@ -71,8 +71,19 @@ const TokenForm = () => {
 
   const clear = () => {
     setTokenInfo(null);
-    roomInputRef.current.value = "";
-    usernameInputRef.current.value = "";
+    setRoomName("");
+    setUsername("");
+  };
+
+  const handleRoomNameChange = (e) => {
+    if (e?.target?.value) {
+      setRoomName(e.target.value);
+    }
+  };
+  const handleUsernameChange = (e) => {
+    if (e?.target?.value) {
+      setUsername(e.target.value);
+    }
   };
 
   return (
@@ -87,10 +98,10 @@ const TokenForm = () => {
           <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Let's you set your webinar username</ListItemText>
         </SettingsListItem>
-        <SettingsListItem>
+        {/* <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Enables screen share option</ListItemText>
-        </SettingsListItem>
+        </SettingsListItem> */}
         <SettingsListItem>
           <Icon src={checkmark} alt="checkmark" />
           <ListItemText>Your video and mic will be off by default</ListItemText>
@@ -99,9 +110,21 @@ const TokenForm = () => {
       <Label htmlFor="roomName">
         Webinar room name (existing or from form above)
       </Label>
-      <Input ref={roomInputRef} id="roomName" type="text" required />
+      <Input
+        onChange={handleRoomNameChange}
+        id="roomName"
+        type="text"
+        required
+        defaultValue={roomName}
+      />
       <Label htmlFor="userName">Admin's username</Label>
-      <Input ref={usernameInputRef} id="userName" type="text" required />
+      <Input
+        defaultValue={username}
+        onChange={handleUsernameChange}
+        id="userName"
+        type="text"
+        required
+      />
       <SubmitButton type="submit" value="Create token" disabled={submitting} />
       {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       {tokenInfo && (
@@ -110,10 +133,11 @@ const TokenForm = () => {
           <Result
             column
             main
-            label="Your admin token (add to end of webinar link):"
-            value={`?t=${tokenInfo?.token}`}
+            label="Your admin link for the webinar:"
+            value={`https://discover.daily.co/${roomName}?t=${tokenInfo?.token}`}
             main
           />
+          <Result label="Your webinar username:" value={username} />
           <ErrorMessage>
             This token is not saved anywhere. Please keep it somewhere safe!
           </ErrorMessage>

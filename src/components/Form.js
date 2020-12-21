@@ -75,5 +75,5 @@ export const ResultsContainer = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  border: 2px solid ${theme.colors.turquoise};
+  border: 2px solid ${theme.colors.black};
 `;
